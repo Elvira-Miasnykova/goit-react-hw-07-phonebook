@@ -4,14 +4,15 @@ import { nanoid } from 'nanoid';
 import { Box } from "../Box";
 import { LabelStyled, InputStyled, ButtonStyled } from "./Form.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "redux/contactsSlice";
+import { addContact } from "redux/operations";
+import { getContacts } from "redux/selectors";
 
 export function Form() { 
     const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+    const [phone, setPhone] = useState('');
     
     const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts.array);
+    const contacts = useSelector(getContacts);
     
     const handleChange = (e) => {
         const { name, value } = e.currentTarget;
@@ -19,8 +20,8 @@ export function Form() {
             case 'name':
                 setName(value);
                 break;
-            case 'number':
-                setNumber(value);
+            case 'phone':
+                setPhone(value);
                 break;
             default:
                 return;
@@ -41,12 +42,12 @@ export function Form() {
         e.preventDefault();
         const newContact = {
             name: e.currentTarget.name.value,
-            number: e.currentTarget.number.value,
+            number: e.currentTarget.phone.value,
             id: nanoid(),
         };
         setName('');
-        setNumber('');
-        addNewContact({name: name, number: number});
+        setPhone('');
+        addNewContact(newContact);
         console.log(newContact);
         
 
@@ -72,11 +73,11 @@ export function Form() {
                     Number
                     <InputStyled
                     type="tel"
-                    name="number"
+                    name="phone"
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
-                    value={number}
+                    value={phone}
                     onChange={handleChange}
                     />
                 </LabelStyled>

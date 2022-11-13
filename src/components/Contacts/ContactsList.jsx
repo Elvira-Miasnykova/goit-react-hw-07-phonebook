@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleDelete } from "redux/contactsSlice";
+import { deleteContact } from "redux/operations";
+import { getContacts, getFilter } from 'redux/selectors';
 //import { Box } from "../Box";
 //import { ContactItem } from './ContactItem/ContactItem';
 import { ContactItem, ContactButton, ContactDescription } from './ContactItem/ContactItem.styled';
 
 export const ContactsList = () => {
     const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts.array);
-    const filter = useSelector(state => state.filter);
+    const contacts = useSelector(getContacts);
+    const filter = useSelector(getFilter);
 
     const contactDelete = (contactId) => {
-        dispatch(handleDelete(contactId))
+        dispatch(deleteContact(contactId))
     };
 
     const getVisibleContacts = () => {
@@ -27,7 +28,7 @@ export const ContactsList = () => {
             {visibleContacts.map((contact) => 
                  <ContactItem key={contact.id}>
                         <ContactDescription>{contact.name}:</ContactDescription>
-                        <ContactDescription>{contact.number}</ContactDescription>
+                        <ContactDescription>{contact.phone}</ContactDescription>
                         <ContactButton type="button" onClick={() => contactDelete(contact.id)}>Delete</ContactButton>
                     </ContactItem>
             )}
