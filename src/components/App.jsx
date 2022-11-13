@@ -1,4 +1,3 @@
-//import { useState } from "react";
 import { Form } from './Form/Form';
 import { ContactsList } from './Contacts/ContactsList';
 import { Title, Header } from './Title.styled';
@@ -8,10 +7,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from 'redux/operations';
 import { getError, getIsLoading } from 'redux/selectors';
-//import { addContact, handleDelete } from "redux/contactsSlice";
-//import {setFilter} from "redux/filterSlice";
-
-
 
 export function App() {
   const dispatch = useDispatch();
@@ -36,7 +31,4 @@ export function App() {
       <ContactsList />
     </Box>
   )
-  
-    
-
 };

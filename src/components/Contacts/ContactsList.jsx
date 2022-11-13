@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from "redux/operations";
 import { getContacts, getFilter } from 'redux/selectors';
-//import { Box } from "../Box";
-//import { ContactItem } from './ContactItem/ContactItem';
 import { ContactItem, ContactButton, ContactDescription } from './ContactItem/ContactItem.styled';
 
 export const ContactsList = () => {
